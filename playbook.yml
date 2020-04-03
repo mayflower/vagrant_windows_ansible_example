@@ -1,0 +1,16 @@
+---
+- hosts: all
+  tasks:
+  - name: install AutoLogon 
+    win_chocolatey:
+      name: autologon
+      state: present
+  - name: install PsTools 
+    win_chocolatey:
+      name: pstools
+      state: present
+  - name: Accept PsExec EULA
+    win_command: psexec -accepteula
+    ignore_errors: yes
+    no_log: true
+

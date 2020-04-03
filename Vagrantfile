@@ -63,8 +63,22 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  # SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+    try { choco -v  }
+    Catch {
+      Set-ExecutionPolicy Bypass -Scope Process -Force
+      [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+      iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    }
+  SHELL
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yml"
+    ansible.host_vars = {
+      "default" => {
+	"ansible_winrm_scheme" => "http"
+      }
+    }
+  end
+
 end
