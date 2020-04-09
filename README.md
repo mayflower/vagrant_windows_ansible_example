@@ -8,6 +8,7 @@ An example on how to use Ansible to provision Windows, based on Vagrant
 * [vagrant](https://www.vagrantup.com/)
 * [packer](https://github.com/joefitzgerald/packer-windows/)
 * [Windows Templates for Packer](https://github.com/joefitzgerald/packer-windows/)
+* [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installation-guide)
 
 ## Steps
 
